@@ -35,14 +35,16 @@
                     genderValue:"all",
                     changeName:""
                 }
-
+            },
+            genderFilter:function(e){
+                this.setState({genderValue:e.target.value});
             },
             render: function(){
                   return (
                       <div>
                         <div className="form-group">
                              <label>按性别筛选</label>
-                             <select className="form-control" >
+                             <select className="form-control" onChange="this.genderFilter">
                                  <option value="all">all</option>
                                  <option value="1">男</option>
                                  <option value="0">女</option>
@@ -52,7 +54,10 @@
                                    <input type="text" className="form-control" placeholder="请输入名字"/> 
                              </div>  
                          </div>
-                         <StudentInfoComponent/>                       
+                         <StudentInfoComponent
+                            studentData={this.state.studentData}
+                            genderValue={this.state.genderValue}
+                         />                       
                       </div>
                     )
             }
@@ -61,6 +66,12 @@
 
         var  StudentInfoComponent=React.createClass({
         render: function() {
+            var list=[];
+            console.log(this.props.genderValue)
+            this.props.studentData.forEach(function(item,index){
+
+                list.push( <StudentComponent studentItem={item} key={index}/> )
+            })
             return (
                 <div>
                     <div className="table-responsive">
@@ -75,9 +86,29 @@
                                         <th>操作</th>
                                     </tr>
                                 </thead>
+                                <tbody id="tb">
+                                    {list}
+                                </tbody>
                         </table>
                     </div>
                 </div>
+            )
+        }
+    })
+
+    var StudentComponent=React.createClass({
+
+        render:function(){
+            var item=this.props.studentItem;
+            return (
+                <tr>
+                    <td>{item.stName}</td>
+                    <td>{item.gentder}</td>
+                    <td>{item.age}</td>
+                    <td>{item.height}</td>
+                    <td>{item.weight}</td>
+                    <td><a href="javascript:;">删除</a></td>
+                </tr>
             )
         }
     })
