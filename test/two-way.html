@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./src/react.js"></script>
+	<script src="./src/react-dom.js"></script>
+	<script src="./src/browser.min.js"></script>
+</head>
+<body>
+<div id="demo"></div>
+<script type="text/babel">	
+
+		var obj={
+				title:"欢迎来到妙味课堂",
+				sendName:"提交",
+				value:"请输入留言"
+		};
+
+		var FirstComponent=React.createClass({
+			getInitialState:function(){
+				return {
+					mes:this.props.value
+				}
+			},
+			changeHandle:function(e){
+				this.setState({mes:e.target.value})
+			},
+			render:function(){
+				return (
+						<div>
+							<h1>{this.props.title}</h1>
+							<input type="text" value={this.state.mes} onChange={this.changeHandle} />
+							<input type="button" value={this.props.sendName}/>
+							<p>{this.state.mes}</p>
+						</div>
+					)
+			}
+		});
+
+
+
+		ReactDOM.render(
+				<FirstComponent {...obj}/>,
+				document.getElementById("demo"),
+				function(){
+					console.log("页面渲染完成");
+				}
+		);
+</script>
+
+
+	
+</body>
+</html>
+
+<!-- 
+	双向绑定方法一：
+		先初始化：（getInitialState 这一步）
+		绑定地向到value: （value={this.state.mes}）
+		onChange....
+
+ -->
