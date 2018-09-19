@@ -39,3 +39,17 @@
 </body>
 
 </html>
+
+<!-- 
+    1)::
+    建立一个app.js 顶级数据文件传入顶级容器Main ,所有的增删除改查方法都在这里面，每次更改之都给给更新顶级容器和localStorage  app.render(app.DataArr) app.infor(0)
+
+    2)::
+        顶级容器准备：数据和方法（方法或者数据变更的是时候调用更新容器）
+        传递给子级容器：<Item key={index} {...item} delectItem={app.delectItem.bind(this,item.id)}/>
+
+        子级容器调用方法：<button className="destroy" onClick={this.props.delectItem}></button>
+
+        创建一个.gitingnore
+
+ -->
